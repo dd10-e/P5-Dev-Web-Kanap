@@ -73,36 +73,27 @@ function productsData(product) {
 //la fonction addToCart, ajoute le produit selectionné au localStorage,
 //Le client a rentré les bonnes infos
 function addToCart(product) {
-    if (product.qty <= 0 || product.color == "") {
-        return;
-    }
-    //va chercher les infos dans le LS
-    let items = getCart();
-
-
+    let items = getCart() ?? [];
+    let found = false;
     //Si il n'y a pas encore de produit
-    if (items.length == 0) {
-        items = [product];
-
-        // Si il y a déjà un produit identique en id et couleur, il ajuste la quantité
-    } else {
-        let found = false;
-
+    if (items.length > 0) {
         items.forEach(item => {
             if (product.id === item.id && product.color === item.color) {
-                found = true;
                 item.qty = parseInt(item.qty) + parseInt(product.qty);
+                found = true
             }
         })
 
         //tout nouveau produit non référencé jusque là
     }
-    if (found == false) {
-        alert('Votre produit a été ajouté au panier')
-        window.location.href = 'http://127.0.0.1.5500/front/html/'
+    if (!found) {
         items.push(product);
+        localStorage.setItem("cart", JSON.stringify(items));
     }
-    localStorage.setItem("cart", JSON.stringify(items));
+
+    alert('Votre produit a été ajouté au panier')
+    //window.location.href = 'http://127.0.0.1.5500/front/html/'
+
 }
 
 
