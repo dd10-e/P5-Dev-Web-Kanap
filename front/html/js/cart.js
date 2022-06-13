@@ -32,10 +32,7 @@ function listenForQtyChange(product) {
 
 ///affiche les informations du produit sur la page en html
 function display(product) {
-    //document.getElementById("cart__items").innerHTML =
-    const idReference = document.querySelector('#cart__items');
-    const classReference = idReference.querySelector('cart__item');
-    classReference.innerHTML =
+    document.getElementById("cart__items").innerHTML =
         `<article class="cart__item" data-id="${product.id}" data-color="${product.color}">
         <div class="cart__item__img">
         <img src="${product.imageUrl}" alt="${product.altTxt}"></img>
