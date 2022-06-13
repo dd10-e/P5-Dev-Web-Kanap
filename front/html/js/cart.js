@@ -1,6 +1,6 @@
 let items = getCart();
-if (items.lenght === 0) {
-    document.querySelector('h1').innerHTML = 'Votre panier est vide';
+if (items.length === 0) {
+    document.querySelector('.cartAndFormContainer').innerHTML = '<h1>Votre panier est vide</>';
     document.querySelector('.cart').getElementsByClassName.display = 'none';
 } else {
     fetch('http://localhost:3000/api/products')
@@ -8,16 +8,19 @@ if (items.lenght === 0) {
         .then(data => {
             const products = buildCompleteList(data, items)
             //boucler sur chaque produit
-            product.forEach(product => {
-                //afficher chaque produit
+            products.forEach((product) => {
                 display(product)
-                //Ecouter le changement de qty
-                listenForQtyChange(product)
-                //ecouter la suppression du produit
-                ListenForDelection(product)
             })
+            /* console.log('===')
+             displayTotal(products)
+             console.log('===')
+             products.forEach(product => {
+                 listenForQtyChange(product)
+                 ListenForDelection(product)
+             })
+ */
 
-            displayTotal(product)
+
         })
 }
 
@@ -29,61 +32,65 @@ function listenForQtyChange(product) {
 
 ///affiche les informations du produit sur la page en html
 function display(product) {
-    /*console.log(product)
-    document.getElementById("cart__items").innerHTML = 
-    `<article class="cart__item" data-id="${product.id}" data-color="${product.color}">
-    <div class="cart__item__img">
-    <img src="${product.imageUrl}" alt="${product.altTxt}"></img>
-    </div>
-    <div class="cart__item__content">
-      <div class="cart__item__content__description">
-        <h2>${product.name}</h2>
-        <p>${product.colors}</p>
-        <p>${product.price}</p>
-      </div>
-      <div class="cart__item__content__settings">
-        <div class="cart__item__content__settings__quantity">
-          <p>Qté : </p>
-          <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${product.qty}">
+    //document.getElementById("cart__items").innerHTML =
+    const idReference = document.querySelector('#cart__items');
+    const classReference = idReference.querySelector('cart__item');
+    classReference.innerHTML =
+        `<article class="cart__item" data-id="${product.id}" data-color="${product.color}">
+        <div class="cart__item__img">
+        <img src="${product.imageUrl}" alt="${product.altTxt}"></img>
         </div>
-        <div class="cart__item__content__settings__delete">
-          <p class="deleteItem">Supprimer</p>
+        <div class="cart__item__content">
+        <div class="cart__item__content__description">
+            <h2>${product.name}</h2>
+            <p>${product.color}</p>
+            <p>${product.price}€</p>
         </div>
-      </div>
-    </div>
-  </article>`
-  */
+        <div class="cart__item__content__settings">
+            <div class="cart__item__content__settings__quantity">
+            <p>Qté : </p>
+            <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${product.qty}">
+            </div>
+            <div class="cart__item__content__settings__delete">
+            <p class="deleteItem">Supprimer</p>
+            </div>
+        </div>
+        </div>
+        </article>`
+
 
 }
 
-function buildCompleteList(data, items) {
-    let list: [];
+function buildCompleteList(data, itemsInCart) {
+    let list = [];
 
     itemsInCart.forEach(item => {
         let product = data.find(el => el._id === item.id);
-        product.qty = item.qty;
-        product.color = item.color;
+        let pro = { ...product }
+        pro.qty = item.qty;
+        pro.color = item.color;
 
-        list.push(product)
+        list.push(pro)
     })
+    return list;
 }
 
-function countTotalProduct(products) {
-    let total = O;
+function countTotalProduct(product) {
+    let totalQty = O;
 
     products.forEach(product => {
-        total += Number(product.qty);
+        totalQty += Number(product.qty);
     })
-    return total
+    return totalQty
 }
 
-function countTotalPrice(products) {
-    let total = O;
+function countTotalPrice(product) {
+    let totalPrice = O;
 
     products.forEach(product => {
-        total += (Number(product.price) * Number(product.qty))
+        totalPrice += (Number(product.price) * Number(product.qty))
     })
-    return total
+    return totalPrice
 }
 
 
@@ -91,25 +98,3 @@ function countTotalPrice(products) {
 function displayTotal(products) {
     document.querySelector('h1').innerText = countTotalProduct(products)
 }
-
-/*
-//Récupérer le local storage
-let localStorageItems = JSON.parse(localStorage.getItem("items"));
-console.table(localStorageItems);
-const positionEmptyCart = document.querySelector("cart__items");
-
-//Si le panier est vide
-function getCart() {
-    if (localStorageItems == 0) {
-        positionEmptyCart.innerHTML = `<p>Votre panier est vide</p>`
-    }
-    else {
-        `<p>123</p>`
-    }
-}
-
-getCart()
-
-console.log(getCart)
-
-*/
