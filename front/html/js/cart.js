@@ -13,7 +13,7 @@ if (items.length === 0) {
             })
             displayTotal(products)
             products.forEach(product => {
-                //listenForQtyChange(product)
+                listenForQtyChange(product)
                 listenForDelection(product)
             })
 
@@ -68,7 +68,8 @@ function display(product) {
         <div class="cart__item__content__description">
             <h2>${product.name}</h2>
             <p>${product.color}</p>
-            <p>${product.price}€</p>
+            <p>${displayPrice(product.price)}</p>
+            
         </div>
         <div class="cart__item__content__settings">
             <div class="cart__item__content__settings__quantity">
@@ -87,68 +88,32 @@ function display(product) {
 
 function displayTotal(products) {
     document.getElementById("totalQuantity").innerText = countTotalProduct(products)
-    document.getElementById("totalPrice").innerText = countTotalPrice(products)
+    document.getElementById("totalPrice").innerText = displayPrice(countTotalPrice(products))
 }
-
 
 function listenForDelection(product) {
-    let deleteItem = document.querySelectorAll(".deleteItem");
-    console.log(deleteItem);
-
-    deleteItem.forEach((delete) => {
-        delete.addEventListener("click", () => {
-            console.log(delete);
-            let totalProductRemove = product.length;
-            console.log(totalProductRemove);
-
-            if (totalProductRemove == 1) {
-                return (
-                    localStorage.removeItem("product"),
-                    console.log("remove tout le panier")
-                );
-            }
-            else {
-                XXXXX
-            }
-        }
-
-
-/*
-function listenForQtyChange(product) {
-    consolelog("===")
-    let newProductQty = product.qty
-    document.querySelectorAll(".itemQuantity").addEventListener("change", (newProductQty) => {
-        if (product.qty < newProductQty) {
-            alert('Un produit a été ajouté')
-            product.qty++
-            localStorage.cart = JSON.stringify(cart);
-            displayTotal();
-        }
-        else {
-            alert('Un produit a été supprimé')
-            product.qty--
-            localStorage.cart = JSON.stringify(cart);
-            displayTotal();
-        }
+    document.querySelector(`article[data-id="${product.id}"][data-color="${product.color}"] .deleteItem`).addEventListener("click", (event) => {
+        const products = getCart();
+        const index = products.findIndex(a => a.id === product._id && a.color === product.color)
+        products.splice(index, 1)
+        localStorage.setItem('cart', JSON.stringify(products));
+        alert('Votre produit a bien été supprimé.')
+        window.location.reload();
     })
 }
 
-
 function listenForQtyChange(product) {
-    document.querySelectorAll(".itemQuantity").addEventListener("change", () => {
-        const adjustQty = document.getElementById('itemQuantity').value;
-        if (product.qty < product.adjustQty && product.color === cart.dataset.color && product.id === product._id) {
-            alert('Un produit a été ajouté')
-            product.qty++
-            localStorage.cart = JSON.stringify(cart);
-            displayTotal();
+    document.querySelector(`article[data-id="${product.id}"][data-color="${product.color}"] .itemQuantity`).addEventListener("input", (event) => {
+        const newQty = event.target.value
+        if (newQty <= 0) {
+            alert('Merci de séléctionner une quantité supérieure à zéro.')
+            return;
         }
-        else {
-            alert('Un produit a été supprimé')
-            product.qty--
-            localStorage.cart = JSON.stringify(cart);
-            displayTotal();
-        }
+        const products = getCart();
+        const item = products.find(a => a.id === product._id && a.color === product.color)
+        item.qty = newQty
+        localStorage.setItem('cart', JSON.stringify(products));
+        alert('votre panier été mis à jour')
+        window.location.reload();
     })
 }
-*/

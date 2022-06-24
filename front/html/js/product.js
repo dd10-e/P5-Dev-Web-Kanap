@@ -64,7 +64,7 @@ function productsData(product) {
     console.log(product)
     document.querySelector('.item__img').innerHTML = `<img src="${product.imageUrl}" alt="${product.altTxt}"></img>`
     document.getElementById("title").innerHTML = `${product.name}`
-    document.getElementById("price").innerHTML = `${product.price}`
+    document.getElementById("price").innerHTML = `${displayPrice(product.price)}`
     document.getElementById("description").innerHTML = `${product.description}`
     document.getElementById("colors").innerHTML = renderSelectOptions(product.colors)
 }

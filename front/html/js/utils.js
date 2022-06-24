@@ -5,3 +5,11 @@ function getCart() {
     }
     return items;
 }
+
+function displayPrice(price) {
+    const formatter = new Intl.NumberFormat('fr-FR', {
+        style: 'currency',
+        currency: 'EUR',
+    });
+    return formatter.format(price);
+}
