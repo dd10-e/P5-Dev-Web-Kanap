@@ -16,118 +16,13 @@ if (items.length === 0) {
                 listenForQtyChange(product)
                 listenForDelection(product)
             })
-            //fetchIdData()
 
 
 
         })
 }
-////////////////////////////////////
-////Formulaire
-///////////////////////////////////
-/*
-fetchIdData();
-const orderButton = document.getElementById("order");
-orderButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    let email = validateEmail(mail.value);
-    let firstName = validateFirstName(prenom.value);
-    let lastName = validateLastName(nom.value);
-    let city = validatecity(ville.value);
-    let adress = validateAdress(adresse.value);
-    if (
-        email == false ||
-        firstName == false ||
-        lastName == false ||
-        city == false ||
-        adress == false
-    ) {
-        if (email == false) {
-            emailErrorMsg.innerHTML = "Merci d'entrer une adresse email valide.";
-        }
-        if (firstName == false) {
-            firstNameErrorMsg.innerHTML = "Veuillez vérifier votre prénom.";
-        }
-        if (lastName == false) {
-            lastNameErrorMsg.innerHTML = "Veuillez vérifier votre nom.";
-        }
-        if (city == false) {
-            cityErrorMsg.innerHTML = "Veuillez vérifier votre ville.";
-        }
-        if (adress == false) {
-            adressErrorMsg.innerHTML = "Veuillez vérifier votre adresse.";
-        }
-        return;
-    }
-})
 
 
-//REGEXs
-const prenom = document.getElementById("firstName");
-const nom = document.getElementById("lastName");
-const ville = document.getElementById("city");
-const adresse = document.getElementById("adress");
-const mail = document.getElementById("email");
-
-//email
-const emailErrorMsg = document.getElementById("emailErrorMsg");
-function validateEmail(mail) {
-    const regexMail = ^ ([a - zA - Z0 -9_\-\.] +)@([a - zA - Z0 -9_\-\.] +) \.([a - zA - Z]{ 2, 5 }) $;
-    if (regexMail.test(mail) == false) {
-        return false;
-    } else {
-        emailErrorMsg.innerHTML = null;
-        return true;
-    }
-}
-
-//names
-const regexName = ^ ([a - zA - Z]{ 2, }\s[a-zA - Z]{ 1,} ' ? -? [a - zA - Z]{ 2, }\s?([a - zA - Z]{ 1,})?) ';
-
-//first name
-const firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
-function validateFirstName(prenom) {
-    if (regexName.test(prenom) == false) {
-        return false;
-    } else {
-        firstNameErrorMsg.innerHTML = null;
-        return true;
-    }
-}
-
-//last name
-const lastNameErrorMsg = document.getElementById("lastNameErrorMsg");
-function validateLastName(nom) {
-    if (regexName.test(nom) == false) {
-        return false;
-    } else {
-        lastNameErrorMsg.innerHTML = null;
-        return true;
-    }
-}
-
-//city
-const cityErrorMsg = document.getElementById("cityErrorMsg");
-function validatecity(ville) {
-    if (regexName.test(ville) == false) {
-        return false;
-    } else {
-        cityErrorMsg.innerHTML = null;
-        return true;
-    }
-}
-
-//adress
-const adressErrorMsg = document.getElementById("adressErrorMsg");
-function validateAdress(adresse) {
-    if (regexName.test(adresse) == false) {
-        return false;
-    } else {
-        adressErrorMsg.innerHTML = null;
-        return true;
-    }
-}
-*/
 function buildCompleteList(data, itemsInCart) {
     let list = [];
 
