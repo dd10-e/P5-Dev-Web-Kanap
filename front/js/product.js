@@ -92,8 +92,8 @@ function addToCart(product) {
     }
     localStorage.setItem("cart", JSON.stringify(items));
 
-    alert('Votre produit a été ajouté au panier')
-    //window.location.href = 'http://127.0.0.1.5500/front/html/'
+    alert("Votre produit a été ajouté au panier, vous allez être redirigé vers la page d'accueil.")
+    window.location.href = 'http://127.0.0.1:5500/front/html/index.html'
 
 }
 

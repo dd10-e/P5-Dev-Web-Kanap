@@ -1,14 +1,13 @@
-const prenom = document.getElementById("firstName").value;
-const nom = document.getElementById("lastName").value;
-const ville = document.getElementById("city").value;
-const adresse = document.getElementById("address").value;
-const mail = document.getElementById("email").value;
+const prenom = document.getElementById("firstName");
+const nom = document.getElementById("lastName");
+const ville = document.getElementById("city");
+const adresse = document.getElementById("address");
+const mail = document.getElementById("email");
 const orderButton = document.getElementById("order");
 
 
 
 orderButton.addEventListener("click", (e) => {
-    console.log('click')
     e.preventDefault();
     let formIsValid = true;
 
@@ -20,46 +19,45 @@ orderButton.addEventListener("click", (e) => {
     hideError('addressErrorMsg')
     hideError('emailErrorMsg')
 
-    if (!validateEmail(mail)) {
+    if (!validateEmail(mail.value)) {
         formIsValid = false
         showError('emailErrorMsg', "Merci d'entrer une adresse email valide.");
     } else {
         hideError('emailErrorMsg')
     }
 
-    if (!validateFirstName(prenom)) {
+    if (!validateFirstName(prenom.value)) {
         formIsValid = false
         showError('firstNameErrorMsg', "Veuillez vérifier votre prénom.");
 
     }
 
-    if (!validateLastName(nom)) {
+    if (!validateLastName(nom.value)) {
         formIsValid = false
         showError('lastNameErrorMsg', "Veuillez vérifier votre nom.");
 
     }
 
-    if (!validateCity(ville)) {
+    if (!validateCity(ville.value)) {
         formIsValid = false
         showError('cityErrorMsg', "Veuillez vérifier votre ville.");
 
     }
 
-    if (!validateAddress(adresse)) {
+    if (!validateAddress(adresse.value)) {
         formIsValid = false
         showError('addressErrorMsg', "Veuillez vérifier votre adresse.");
 
     }
 
     if (formIsValid) {
-        console.log('tout est bon')
         let payload = {
             contact: {
-                firstName: prenom,
-                lastName: nom,
-                address: adresse,
-                city: ville,
-                email: mail
+                firstName: prenom.value,
+                lastName: nom.value,
+                address: adresse.value,
+                city: ville.value,
+                email: mail.value
             },
             products: getCart().map(item => item.id)
         }
@@ -118,6 +116,7 @@ function validateFirstName(prenom) {
     if (prenom.match(regexName)) {
         return true;
     }
+    return false;
 }
 
 function validateLastName(nom) {
@@ -125,6 +124,7 @@ function validateLastName(nom) {
     if (nom.match(regexName)) {
         return true;
     }
+
 }
 
 
