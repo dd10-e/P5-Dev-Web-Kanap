@@ -1,19 +1,20 @@
 const id = getId();
 
-
+//Récupérer l'ID
 fetch(`http://localhost:3000/api/products/` + id)
     .then(data => data.json())
     .then(product => {
         productsData(product);
+        //Ecouter au click
         document.getElementById('addToCart').addEventListener('click', () => {
             const color = document.getElementById('colors').value;
             const qty = document.getElementById('quantity').value;
-
+            //Message si aucune couleur selectionnée
             if (color.length === 0) {
                 alert('Merci de sélectionner une couleur.')
                 return;
             }
-
+            //Message si aucune cquantité selectionnée
             if (qty <= 0) {
                 alert('Merci de sélectionner une quantité supérieure à zero.')
                 return;
@@ -36,7 +37,7 @@ function getId() {
 
     return params.id;
 }
-
+//Récupérer le panier
 function getCart() {
     let items = [];
     if (localStorage.getItem("cart") != null) {

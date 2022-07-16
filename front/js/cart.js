@@ -1,7 +1,10 @@
+//Récupérer le panier
 let items = getCart();
+// Si panier vide, afficher msg et masquer le formulaire
 if (items.length === 0) {
     document.querySelector('.cartAndFormContainer').innerHTML = '<h1>Votre panier est vide</>';
     document.querySelector('.cart').getElementsByClassName.display = 'none';
+    //Récupérer données API
 } else {
     fetch('http://localhost:3000/api/products')
         .then(data => data.json())
@@ -11,7 +14,9 @@ if (items.length === 0) {
             products.forEach((product) => {
                 display(product)
             })
+            //Afficher total articles et prix
             displayTotal(products)
+            //Ecouter modification du panier
             products.forEach(product => {
                 listenForQtyChange(product)
                 listenForDelection(product)

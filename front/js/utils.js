@@ -1,3 +1,4 @@
+//Récupérer le panier
 function getCart() {
     let items = [];
     if (localStorage.getItem("cart") != null) {
@@ -5,7 +6,7 @@ function getCart() {
     }
     return items;
 }
-
+//Afficher le prix en Euros
 function displayPrice(price) {
     const formatter = new Intl.NumberFormat('fr-FR', {
         style: 'currency',

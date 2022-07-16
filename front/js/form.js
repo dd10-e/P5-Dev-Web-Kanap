@@ -1,3 +1,4 @@
+//Simplifier le getElementById
 const prenom = document.getElementById("firstName");
 const nom = document.getElementById("lastName");
 const ville = document.getElementById("city");
@@ -6,19 +7,19 @@ const mail = document.getElementById("email");
 const orderButton = document.getElementById("order");
 
 
-
+//Ecouter au click
 orderButton.addEventListener("click", (e) => {
     e.preventDefault();
     let formIsValid = true;
 
 
-
+    //Masquer par défault les msg d'erreur
     hideError('firstNameErrorMsg')
     hideError('lastNameErrorMsg')
     hideError('cityErrorMsg')
     hideError('addressErrorMsg')
     hideError('emailErrorMsg')
-
+    //Afficher msg d'erreur si REGEX invalidé
     if (!validateEmail(mail.value)) {
         formIsValid = false
         showError('emailErrorMsg', "Merci d'entrer une adresse email valide.");
@@ -49,7 +50,7 @@ orderButton.addEventListener("click", (e) => {
         showError('addressErrorMsg', "Veuillez vérifier votre adresse.");
 
     }
-
+    //Créer un objet contact avec coordonnées et panier
     if (formIsValid) {
         let payload = {
             contact: {
@@ -61,7 +62,7 @@ orderButton.addEventListener("click", (e) => {
             },
             products: getCart().map(item => item.id)
         }
-
+        //Envoyer les données sur l'API puis rediriger vers page confirmation
         fetch('http://localhost:3000/api/products/order', {
             method: 'POST',
             headers: {
@@ -88,7 +89,7 @@ function hideError(_id) {
 function showError(_id, message) {
     document.getElementById(_id).innerHTML = message
 }
-
+//REGEXs///////////////////
 function validateAddress(adresse) {
     const regexAddress = /^\d+\s[A-z]+\s[A-z]+/g;
     if (adresse.match(regexAddress)) {
