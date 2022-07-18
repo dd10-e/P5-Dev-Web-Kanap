@@ -37,14 +37,7 @@ function getId() {
 
     return params.id;
 }
-//Récupérer le panier
-function getCart() {
-    let items = [];
-    if (localStorage.getItem("cart") != null) {
-        items = JSON.parse(localStorage.getItem("cart"));
-    }
-    return items;
-}
+
 ///créer une fonction appelée RenderSelectOptions
 function renderSelectOptions(colorValues) {
     ///créer une variable a l'intérieur avec le placeholder en premier élément
@@ -94,7 +87,7 @@ function addToCart(product) {
     localStorage.setItem("cart", JSON.stringify(items));
 
     alert("Votre produit a été ajouté au panier, vous allez être redirigé vers la page d'accueil.")
-    window.location.href = 'http://127.0.0.1:5500/front/html/index.html'
+    window.location.href = 'index.html'
 
 }
 

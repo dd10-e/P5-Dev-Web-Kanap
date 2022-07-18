@@ -6,6 +6,8 @@ const adresse = document.getElementById("address");
 const mail = document.getElementById("email");
 const orderButton = document.getElementById("order");
 
+const regexWordsOnly = /([A-ZÀ-ÿ][-,a-z. ']+[ ]*\D\b)+/gim;
+
 
 //Ecouter au click
 orderButton.addEventListener("click", (e) => {
@@ -98,8 +100,7 @@ function validateAddress(adresse) {
 }
 
 function validateCity(ville) {
-    const regexCity = /([A-ZÀ-ÿ][-,a-z. ']+[ ]*\D\b)+/gim;
-    if (ville.match(regexCity)) {
+    if (ville.match(regexWordsOnly)) {
         return true;
     }
 }
@@ -113,19 +114,16 @@ function validateEmail(mail) {
 
 
 function validateFirstName(prenom) {
-    const regexName = /([A-ZÀ-ÿ][-,a-z. ']+[ ]*\D\b)+/gim;
-    if (prenom.match(regexName)) {
+    if (prenom.match(regexWordsOnly)) {
         return true;
     }
     return false;
 }
 
 function validateLastName(nom) {
-    const regexName = /([A-ZÀ-ÿ][-,a-z. ']+[ ]*\D\b)+/gim;
-    if (nom.match(regexName)) {
+    if (nom.match(regexWordsOnly)) {
         return true;
     }
-
 }
 
 

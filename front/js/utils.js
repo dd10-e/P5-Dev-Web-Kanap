@@ -6,6 +6,9 @@ function getCart() {
     }
     return items;
 }
+
+
+
 //Afficher le prix en Euros
 function displayPrice(price) {
     const formatter = new Intl.NumberFormat('fr-FR', {
