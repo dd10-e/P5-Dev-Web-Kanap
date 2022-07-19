@@ -2,12 +2,11 @@ const id = getId();
 
 //Récupérer l'ID
 fetch(`http://localhost:3000/api/products/` + id)
-    .then(data => data.json())
-    .then(product => {
-        if (!data.ok) {
-            throw Error(data.statusText);
+    .then(res => {
+        if (!res.ok) {
+            throw Error(res.statusText);
         }
-        return data.json();
+        return res.json();
     })
 
     .then(product => {
