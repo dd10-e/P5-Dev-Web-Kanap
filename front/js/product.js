@@ -4,6 +4,13 @@ const id = getId();
 fetch(`http://localhost:3000/api/products/` + id)
     .then(data => data.json())
     .then(product => {
+        if (!data.ok) {
+            throw Error(data.statusText);
+        }
+        return data.json();
+    })
+
+    .then(product => {
         productsData(product);
         //Ecouter au click
         document.getElementById('addToCart').addEventListener('click', () => {
@@ -25,6 +32,9 @@ fetch(`http://localhost:3000/api/products/` + id)
             addToCart(item)
         })
     })
+    .catch(function (err) {
+        window.location.href = '404.html'
+    });
 
 
 
