@@ -200,7 +200,8 @@ main {
 	margin-bottom: 40px;
 }
 
-.backToHome button {
+.backToHome a {
+	display: inline-block;
 	font-size: 22px;
 	border-radius: 40px;
 	border: 0;
@@ -208,11 +209,11 @@ main {
 	color: white;
 	padding: 18px 28px;
 	cursor: pointer;
+	text-decoration: none;
 }
 
-.backToHome:hover {
+.backToHome a:hover {
 	box-shadow: rgb(42 18 206 / 90%) 0 0 22px 6px;
-	border-radius: 40px;
 }
 
 .limitedWidthBlockContainercenter {
